@@ -1,0 +1,20 @@
+{
+  "name": "nebula",
+  "displayName": "Nebula",
+  "description": "Nebula vscode snippets",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets.json"
+      }
+    ]
+  }
+}

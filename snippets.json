@@ -1,0 +1,15 @@
+{
+  "Query Key Factory": {
+    "prefix": "qkf",
+    "body": [
+      "// Query Key Factory",
+      "export const ${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys} = {",
+      "  all: [\"${2:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}${2}/i}}\"] as const,",
+      "  ${3:accountBusiness}: (accountId: string, businessId: string) =>",
+      "    [...${1}.all, accountId, businessId] as const,",
+      "};",
+      ""
+    ],
+    "description": ""
+  }
+}

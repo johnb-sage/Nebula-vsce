@@ -1,7 +1,8 @@
 {
-  "name": "nebula",
-  "displayName": "Nebula",
-  "description": "Nebula vscode snippets",
+  "name": "nebula-squad-snippets",
+  "displayName": "Nebula Squad Snippets",
+  "description": "Nebula Squad snippets for TanStack Query and more.",
+  "publisher": "NebulaSquad",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -20,5 +21,6 @@
         "path": "./snippets.json"
       }
     ]
-  }
+  },
+  "license": "MIT"
 }

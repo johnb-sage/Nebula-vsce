@@ -1,8 +1,6 @@
 # Change Log
 
-All notable changes to the "nebula" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to the "nebula squad snippet" extension will be documented in this file.
 
 ## [0.0.1]
 
@@ -10,4 +8,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.0.2]
 
-- Add icon.
+### Added
+
+- Extension icon
+
+## [0.0.3]
+
+### Added
+
+- Make Query (mkq)
+- Fetch function (ffn)

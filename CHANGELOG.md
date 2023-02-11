@@ -18,3 +18,13 @@ All notable changes to the "nebula squad snippet" extension will be documented i
 
 - Make Query (mkq)
 - Fetch function (ffn)
+
+## [0.0.4]
+
+### Added
+
+- useQuery (uqy)
+
+### Changed
+
+- updated README with snippet descriptions

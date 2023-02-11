@@ -2,23 +2,17 @@
 
 The Nebula extension provides a set of code snippets to help write high-quality solutions with less effort.
 
-## Features
+## Snippets:
 
-Snippets include:
+### TanStack Query
 
-- TanStack Query
-- more to come
+| Snippet | Description                  |
+| ------- | ---------------------------- |
+| `ffn`   | Fetch function               |
+| `mkq`   | Make Query identity function |
+| `qkf`   | Query Key Factory            |
+| `uqy`   | useQuery hook                |
 
-## Release Notes
+These snippets generate function & object names from the file name they are called in. For example, if you are working in a file named `useGetProducts.ts`, the `uqy` snippet will generate a custom useQuery hook named `useGetProducts`, while the `qkf` snippet will generate a query key factory object named `productsKeys`.
 
-### 0.0.1
-
-Initial release of Nebula snippets.
-
-## 0.0.2
-
-- Added an extension icon.
-
-## 0.0.3
-
-- Added Make Query (mkq) and Fetch function (ffn) snippets.
+All snippets are designed to work together to minimise the amount of code you need to write to create custom query hooks from scatch.

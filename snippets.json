@@ -1,12 +1,12 @@
 {
   "Query Key Factory": {
-    "prefix": "tqkf",
+    "prefix": "qkf",
     "body": [
       "// Query Key Factory",
-      "export const ${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys} = {",
-      "  all: [\"${2:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\"] as const,",
-      "  ${3:accountBusiness}: (${4:accountId: string,} ${5:businessId: string}) =>",
-      "    [...${1}.all, ${6:accountId,} ${7:businessId}] as const,",
+      "export const ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys = {",
+      "  all: [\"${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\"] as const,",
+      "  ${2:accountBusiness}: (${3:accountId: string}, ${4:businessId: string}) =>",
+      "    [...${1}.all, ${5:accountId}, ${6:businessId}] as const,",
       "};",
       ""
     ],
@@ -15,11 +15,12 @@
   "Make Query": {
     "prefix": "mkq",
     "body": [
-      "export const ${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query} = makeQuery(",
-      "  (${2:accountId: string,} ${3:businessId: string}) => ({",
-      "    queryKey: ${4:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys}.${5:accountBusiness}(${6:accountId,} ${7:businessId}),",
+      "// Make Query helper",
+      "export const ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query = makeQuery(",
+      "  (${1:accountId: string}, ${2:businessId: string}) => ({",
+      "    queryKey: ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys.${3:accountBusiness}(${4:accountId}, ${5:businessId}),",
       "    queryFn: ({ signal }) => {",
-      "      return ${8:fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}}({ ${9:accountId,} ${10:businessId,} signal });",
+      "      return fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}({ ${6:accountId}, ${7:businessId,} signal });",
       "    },",
       "  })",
       ");"
@@ -29,28 +30,40 @@
   "Fetch function": {
     "prefix": "ffn",
     "body": [
-      "const ${1:fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}} = async ({",
-      "  accountId,",
-      "  businessId,",
+      "const fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i} = async ({",
+      "  ${1:accountId},",
+      "  ${2:businessId},",
       "  signal,",
       "}: {",
-      "  accountId: string;",
-      "  businessId: string;",
+      "  ${3:accountId: string};",
+      "  ${4:businessId: string};",
       "  signal?: AbortSignal;",
       "}) => {",
       "  const url = buildUrl({",
-      "    apiName: \"${2:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\",",
+      "    apiName: \"${5:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\",",
       "    urlParamsToReplace: [",
-      "      { Key: \"AccountId\", Value: accountId },",
-      "      { Key: \"BusinessId\", Value: businessId },",
+      "      { Key: \"${6:AccountId}\", Value: ${7:accountId} },",
+      "      { Key: \"${8:BusinessId}\", Value: ${9:businessId} },",
       "    ],",
       "  });",
-      "  const response = await Request.${3:get}<${4:ProductInstance[]}>(url, {",
+      "  const response = await Request.${10:get}<${11:TData}>(url, {",
       "    signal,",
       "  });",
-      "  return ${5:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/captialize}$2/i}}(response.body);",
+      "  return ${12:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/captialize}$2/i}}(response.body);",
       "};"
     ],
     "description": "Fetch function"
+  },
+  "useQuery": {
+    "prefix": "uqy",
+    "body": [
+      "export const ${TM_FILENAME_BASE} = (${2:accountId: string}, ${3:businessId: string}) => {",
+      "  return useQuery<${4:TData}, HttpError>({",
+      "    ...${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${5:accountId}, ${6:businessId}),",
+      "    refetchOnWindowFocus: false,",
+      "  });",
+      "};"
+    ],
+    "description": "useQuery"
   }
 }

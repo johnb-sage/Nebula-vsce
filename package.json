@@ -3,7 +3,7 @@
   "displayName": "Nebula Squad Snippets",
   "description": "Nebula Squad snippets for TanStack Query and more.",
   "publisher": "NebulaSquad",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/johnb-sage/Nebula-vsce"

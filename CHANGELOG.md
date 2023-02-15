@@ -28,3 +28,13 @@ All notable changes to the "nebula squad snippet" extension will be documented i
 ### Changed
 
 - updated README with snippet descriptions
+
+## [0.0.5]
+
+### Added
+
+- prefetchQuery (pqy)
+
+### Changed
+
+- changed arrow functions to normal functions

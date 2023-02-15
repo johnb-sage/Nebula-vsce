@@ -7,8 +7,7 @@
       "  all: [\"${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\"] as const,",
       "  ${2:accountBusiness}: (${3:accountId: string}, ${4:businessId: string}) =>",
       "    [...${1}.all, ${5:accountId}, ${6:businessId}] as const,",
-      "};",
-      ""
+      "};"
     ],
     "description": "Query Key Factory"
   },
@@ -20,7 +19,7 @@
       "  (${1:accountId: string}, ${2:businessId: string}) => ({",
       "    queryKey: ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys.${3:accountBusiness}(${4:accountId}, ${5:businessId}),",
       "    queryFn: ({ signal }) => {",
-      "      return fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}({ ${6:accountId}, ${7:businessId,} signal });",
+      "      return fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}({ ${4:accountId}, ${5:businessId}, signal });",
       "    },",
       "  })",
       ");"
@@ -30,7 +29,7 @@
   "Fetch function": {
     "prefix": "ffn",
     "body": [
-      "const fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i} = async ({",
+      "async function fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}({",
       "  ${1:accountId},",
       "  ${2:businessId},",
       "  signal,",
@@ -38,7 +37,7 @@
       "  ${3:accountId: string};",
       "  ${4:businessId: string};",
       "  signal?: AbortSignal;",
-      "}) => {",
+      "}) {",
       "  const url = buildUrl({",
       "    apiName: \"${5:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\",",
       "    urlParamsToReplace: [",
@@ -50,20 +49,37 @@
       "    signal,",
       "  });",
       "  return ${12:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/captialize}$2/i}}(response.body);",
-      "};"
+      "}"
     ],
     "description": "Fetch function"
   },
   "useQuery": {
     "prefix": "uqy",
     "body": [
-      "export const ${TM_FILENAME_BASE} = (${2:accountId: string}, ${3:businessId: string}) => {",
-      "  return useQuery<${4:TData}, HttpError>({",
-      "    ...${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${5:accountId}, ${6:businessId}),",
+      "export function ${TM_FILENAME_BASE}(${1:accountId: string}, ${2:businessId: string}) {",
+      "  const queryOptions = ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${3:accountId}, ${4:businessId});",
+      "",
+      "  const query = useQuery<${5:TData}, HttpError>({",
+      "    ...queryOptions,",
       "    refetchOnWindowFocus: false,",
       "  });",
-      "};"
+      "",
+      "  return { query, queryKey: queryOptions.queryKey };",
+      "}"
     ],
     "description": "useQuery"
+  },
+  "prefetchQuery": {
+    "prefix": "pqy",
+    "body": [
+      "export function usePrefetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}(${1:accountId: string}, ${2:businessId: string}) {",
+      "  const queryClient = useQueryClient();",
+      "  queryClient.prefetchQuery({",
+      "    ...${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${3:accountId}, ${4:businessId}),",
+      "    staleTime: 1000 * 60 * 3, //* prefetch if cache is older than 3 minutes",
+      "  });",
+      "}"
+    ],
+    "description": ""
   }
 }

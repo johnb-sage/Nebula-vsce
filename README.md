@@ -10,6 +10,7 @@ The Nebula extension provides a set of code snippets to help write high-quality 
 | ------- | ---------------------------- |
 | `ffn`   | Fetch function               |
 | `mkq`   | Make Query identity function |
+| `pqy`   | prefetchQuery hook           |
 | `qkf`   | Query Key Factory            |
 | `uqy`   | useQuery hook                |
 

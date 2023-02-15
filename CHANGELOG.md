@@ -38,3 +38,9 @@ All notable changes to the "nebula squad snippet" extension will be documented i
 ### Changed
 
 - changed arrow functions to normal functions
+
+## [0.0.6]
+
+### Added
+
+- added additional snippet prefixes

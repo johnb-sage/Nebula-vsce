@@ -1,6 +1,6 @@
 {
   "Query Key Factory": {
-    "prefix": "qkf",
+    "prefix": ["qkf", "query key factory"],
     "body": [
       "// Query Key Factory",
       "export const ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys = {",
@@ -12,7 +12,7 @@
     "description": "Query Key Factory"
   },
   "Make Query": {
-    "prefix": "mkq",
+    "prefix": ["mkq", "makeQuery"],
     "body": [
       "// Make Query helper",
       "export const ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query = makeQuery(",
@@ -27,7 +27,7 @@
     "description": "Make Query helper"
   },
   "Fetch function": {
-    "prefix": "ffn",
+    "prefix": ["ffn", "fetch function"],
     "body": [
       "async function fetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}({",
       "  ${1:accountId},",
@@ -41,20 +41,20 @@
       "  const url = buildUrl({",
       "    apiName: \"${5:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\",",
       "    urlParamsToReplace: [",
-      "      { Key: \"${6:AccountId}\", Value: ${7:accountId} },",
-      "      { Key: \"${8:BusinessId}\", Value: ${9:businessId} },",
+      "      { Key: \"${6:AccountId}\", Value: ${1} },",
+      "      { Key: \"${7:BusinessId}\", Value: ${2} },",
       "    ],",
       "  });",
-      "  const response = await Request.${10:get}<${11:TData}>(url, {",
+      "  const response = await Request.${8:get}<${11:TData}>(url, {",
       "    signal,",
       "  });",
-      "  return ${12:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/captialize}$2/i}}(response.body);",
+      "  return ${9:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/captialize}$2/i}}(response.body);",
       "}"
     ],
     "description": "Fetch function"
   },
   "useQuery": {
-    "prefix": "uqy",
+    "prefix": ["uqy", "useQuery"],
     "body": [
       "export function ${TM_FILENAME_BASE}(${1:accountId: string}, ${2:businessId: string}) {",
       "  const queryOptions = ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${3:accountId}, ${4:businessId});",
@@ -70,16 +70,16 @@
     "description": "useQuery"
   },
   "prefetchQuery": {
-    "prefix": "pqy",
+    "prefix": ["pqy", "prefetchQuery"],
     "body": [
       "export function usePrefetch${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/$2/i}(${1:accountId: string}, ${2:businessId: string}) {",
       "  const queryClient = useQueryClient();",
       "  queryClient.prefetchQuery({",
       "    ...${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${1:/downcase}$2$3/i}Query(${3:accountId}, ${4:businessId}),",
-      "    staleTime: 1000 * 60 * 3, //* prefetch if cache is older than 3 minutes",
+      "    staleTime: 1000 * 60 * 3, // prefetch if cache entry is older than 3 minutes",
       "  });",
       "}"
     ],
-    "description": ""
+    "description": "prefetchQuery"
   }
 }

@@ -2,32 +2,17 @@
 
 All notable changes to the "nebula squad snippet" extension will be documented in this file.
 
-## [0.0.1]
+## [0.0.7]
 
-- Initial release
+### Fixed
 
-## [0.0.2]
+- `query key factory (qkf)` snippet now references itself correctly
 
-### Added
-
-- Extension icon
-
-## [0.0.3]
+## [0.0.6]
 
 ### Added
 
-- Make Query (mkq)
-- Fetch function (ffn)
-
-## [0.0.4]
-
-### Added
-
-- useQuery (uqy)
-
-### Changed
-
-- updated README with snippet descriptions
+- added additional snippet prefixes
 
 ## [0.0.5]
 
@@ -39,8 +24,29 @@ All notable changes to the "nebula squad snippet" extension will be documented i
 
 - changed arrow functions to normal functions
 
-## [0.0.6]
+## [0.0.4]
 
 ### Added
 
-- added additional snippet prefixes
+- useQuery (uqy)
+
+### Changed
+
+- updated README with snippet descriptions
+
+## [0.0.3]
+
+### Added
+
+- Make Query (mkq)
+- Fetch function (ffn)
+
+## [0.0.2]
+
+### Added
+
+- Extension icon
+
+## [0.0.1]
+
+- Initial release

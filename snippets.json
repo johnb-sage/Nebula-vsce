@@ -6,7 +6,7 @@
       "export const ${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys = {",
       "  all: [\"${1:${TM_FILENAME_BASE/^use(get|post|patch|delete)(.*)/${1:/upcase}$2/i}}\"] as const,",
       "  ${2:accountBusiness}: (${3:accountId: string}, ${4:businessId: string}) =>",
-      "    [...${1}.all, ${5:accountId}, ${6:businessId}] as const,",
+      "    [...${TM_FILENAME_BASE/^use(get|post|patch|delete)(.)(.*)/${2:/downcase}$3/i}Keys.all, ${5:accountId}, ${6:businessId}] as const,",
       "};"
     ],
     "description": "Query Key Factory"
